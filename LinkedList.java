@@ -71,7 +71,7 @@ public class LinkedList{
     }
     
     /*Delete duplicates in a singly linked list*/
-    public deleteDuplicates(){
+    public void deleteDuplicates(){
         HashSet <Node> set = new HashSet <Node> ();
         Node curr = first;
         Node follower = null;
@@ -86,14 +86,33 @@ public class LinkedList{
             }
         }
     }
+    public void deleteDuplicates2(){
+        //Implementation withour using an extra data structure: O(n2)
+        Node follower = first, curr, tmp;
+        while(follower!=null){
+            tmp = follower;
+            curr = follower.next;
+            while(curr!=null){
+                if(curr.value == follower.value){
+                    curr = curr.next;
+                    tmp.next = curr;
+                }
+                else{
+                    tmp = curr;
+                    curr = curr.next;
+                }
+            }
+            follower = follower.next;
+        }
+    }
     
     /*Merge two sorted linked lists*/
-    public LinkedList merge(LinkedList l1, LinkedList l2){
-        LinkedList lst = new LinkedList(merge(l1.first, l2.first));
+    public static LinkedList merge(LinkedList l1, LinkedList l2){
+        return new LinkedList(merge(l1.first, l2.first));
     }
-    public Node merge(Node n1, Node n2){
+    public static Node merge(Node n1, Node n2){
         ArrayList <Node> lst = new ArrayList <Node>();
-        while(n1!=null || n2!=null){
+        while(n1!=null && n2!=null){
             if(n1.value <= n2.value){
                 lst.add(n1);
                 n1=n1.next;
@@ -103,9 +122,41 @@ public class LinkedList{
                 n2=n2.next;
             }
         }
-        Node first = lst.get(0);
-        for(int i=0; i<lst.size()-1; i++){
-            lst.get(i).next = lst.get(i+1);
+        Node nx = n1==null?n2:n1;
+        while(nx != null){
+            lst.add(nx);
+            nx = nx.next;
         }
+        if(lst.size()>0){
+            Node first = lst.get(0);
+            for(int i=0; i<lst.size()-1; i++){
+                lst.get(i).next = lst.get(i+1);
+            }
+            return first;
+        }
+        return null;
+    }
+    
+    /*Given a Singly Linked List print its values in reverse order*/
+    public void printReverse(){ printReverse(first);}
+    public void printReverse(Node node){
+        if(node != null)
+            printReverse(node.next);
+        System.out.println(node.value);
+    }
+    
+    /*Reverse a linked list in place*/
+    public void reverse(){
+        Node curr = first;
+        Node nxt = curr.next;
+        Node prev = null;
+        while(curr!=null && curr.nxt!=null){
+            curr.next = prev;
+            prev = curr;
+            curr = nxt;
+            nxt = curr.nxt;
+        }
+        curr.next = prev;
+        first = curr;
     }
 }
