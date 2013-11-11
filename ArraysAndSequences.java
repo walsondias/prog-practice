@@ -1,40 +1,43 @@
 public class ArraysAndSequences{
   /*Given an array of numbers including negative, print the highest sum of the continuous sequence*/
-  public void highestSumSequence(int []arr){
-    if(arr.length == 0)
-      return;
-    if (arr.length == 1)
-      System.out.println(arr[0]);
-    else
-      int start = 0, end = 0;
-      int currSum = arr[0];
-      for(int i=1; i<arr.length; i++){
-        if(arr[i] > 0){
-          if(currSum <= 0){
-            currSum = arr[i];
-            start = i;
-            end = i;
-          }
-          else{
-            currSum += arr[i];
-            end = i;
-          }
+  public void highestSumSequence(int[] arr) {
+        if (arr.length == 0) {
+            return;
         }
-        else{
-          if(currSum <= arr[i]){
-            currSum = arr[i];
-            start = i;
-            end = i;
-          }
-          else{
-            currSum += arr[i];
-          }
+        if (arr.length == 1) {
+            System.out.println(arr[0]);
+        } else {
+            int start = 0, end = 0, startactual = 0, endactual = 0;
+            int currSum = arr[0], maxSum = arr[0];
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] > 0) {
+                    if (currSum <= 0) {
+                        currSum = arr[i];
+                        start = i;
+                        end = i;
+                    } else {
+                        currSum += arr[i];
+                        end = i;
+                    }
+                } else {
+                    if (currSum <= arr[i]) {
+                        currSum = arr[i];
+                        start = i;                        
+                    } else {
+                        currSum += arr[i];
+                    }
+                }
+                if(currSum > maxSum){
+                    maxSum = currSum;
+                    endactual = end;
+                    startactual = start;
+                }
+            }
+            for (int i = startactual; i <= endactual; i++) {
+                System.out.print(arr[i] + "\t");
+            }
         }
-      }
-      for(int i=start; i<=end; i++){
-        System.out.print(arr[i]+""\t);
-      }
-  }
+    }
   
   /*Compute factorial*/
   long factorial(long num){
