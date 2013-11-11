@@ -129,7 +129,45 @@ public class ArraysAndSequences{
     return arr[len-1]*arr[len-2]*arr[len-3];
   }
   
+  /*Write a function that takes two strings and returns whether they are permutations*/
+  public boolean arePermutations(String s1, String s2){
+    HashSet <String> set = new HashSet <String>();
+    for(int i=0; i<s1.length(); i++){
+        set.add(s1.charAt(i));
+    }
+    for(int i=0; i<s2.length(); i++){
+      if(!set.contains(s2.charAt(i))
+        return false;
+    }
+    return true;
+  }
   
-  /*TODO: Given 2 int arrays containing single digit ints. Each array represents a very long number. 
-   *Multiply them and return results as another int array*/
+  /*Given aa array with numbers from 1-250 in random order, but missing 1 number. Find the missed number.*/
+  public int missingNumber(int [] arr){
+    boolean [] isPresent = new boolean [251];
+    for(int i: arr)
+      isPresent[i] = true;
+    for(int i=0; i<251; i++){
+      if(!isPresent[i])
+        return i;
+    }
+  }
+  
+  /*TODO: Given 2 int arrays containing single digit ints. Each array represents a huge number. 
+   *Multiply the 2 huge numbers and return result as an int array*/
+   public int [] multiplyHugeNum(int []arr1, int[]arr2){
+    int []res = new int[arr1.length + arr2.length];
+    int carry = 0;
+    for(int i=1; i<=arr1.length; i++){
+      for(int j=1; j<=arr2.length; j++){
+        int tmp = res[res.length - j - i + 1];
+        res[res.length - j - i + 1] = (tmp + (carry + arr1[arr1.length - i]*arr2[arr2.length - j]))%10;
+        carry = (tmp + (carry + arr1[arr1.length - i]*arr2[arr2.length - j]))/10;
+      }
+      if(carry > 0)
+        res[res.length - arr2.length - i] = res[res.length - arr2.length - i - 1] + carry;
+      carry = 0;
+    }
+    return res;
+   }
 }
