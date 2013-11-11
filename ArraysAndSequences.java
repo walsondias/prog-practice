@@ -28,7 +28,6 @@ public class ArraysAndSequences{
           }
           else{
             currSum += arr[i];
-            end = i;
           }
         }
       }
@@ -36,4 +35,101 @@ public class ArraysAndSequences{
         System.out.print(arr[i]+""\t);
       }
   }
+  
+  /*Compute factorial*/
+  long factorial(long num){
+    if(num == 1)
+      return 1;
+    else
+      return num * factorial(num - 1);
+  }
+  long factorialByIteration(long num){
+    for(long i = num-1; i>=1; i--){
+      num = num * i;
+    }
+    return num;
+  }
+  
+  /*Given an integer array, find any integer that occurs more than once.*/
+  int findAnyRepeatedInteger(int [] arr){
+    //Solution using a hashset data structure: O(n) complexity
+    HashSet <Integer> set = new HashSet <Integer>();
+    for(int i: arr){
+      if(set.contains(i))
+        return i;
+      else
+        set.add(i);
+    }
+    return -1;//Return -1 if no duplicates found
+  }
+  int findAnyRepeatedInteger2(int [] arr){
+    //Solution without using any extra data structure: O(n.log n) due to sorting
+    Arrays.sort(arr);
+    for(int i=0; i<arr.length-1; ++){
+      if(arr[i)==arr[i+1])
+        return arr[i];
+    }
+    return -1;
+  }
+  
+  /*Find the first repeated character in a string*/
+  public char firstRepeatedCharInString(String str){
+    HashSet <String> set = new HashSet <String>();
+    for(int i=0; i<str.length(); i++){
+      if(set.contains(str.charAt(i))
+        return str.charAt(i);
+      else
+        set.add(str.charAt(i));
+    }
+  }
+  
+  /*Find the nth fibonacci number*/
+  public long fibonacci(int n){
+    //Recursive implementation: Time-O(n2) Space-O(1)
+    if(n == 1)
+      return 0;
+    else if(n == 2)
+      return 1;
+    else
+      return fibonacci(n-1)+fibonacci(n-2);
+  }
+  public long fibonacci(int n){
+    //Iterative implementation: Time-O(n) Space: O(n)
+    long []fibs = new long [n];
+    fibs[0] = 0;
+    fibs[1] = 1;
+    for(int i=2; i<n; i++){
+      fibs[i]=fibs[i-1]+fibs[i-2];
+    }
+    return fibs[n-1];
+  }
+  public long fibonacci3(int n){
+    //Iterative implementation: TIme-O(n) Space-O(1)
+    if(n == 1)
+      return 0;
+    else if(n == 2)
+      return 1;
+    else{
+      int a = 0, b = 1, fib;
+      for(int i=3; i<=n; i++){
+        fib = a+b;
+        a = b;
+        b = fib;
+      }
+    }
+  }
+  
+  /*Given an integer array. Find 3 numbers with the largest product*/
+  long largestProduct(int [] arr){
+    int len = arr.length;
+    for(int i=0; i<len; i++){
+      arr[i] = Math.abs(i);
+    }
+    Arrays.sort(arr);
+    return arr[len-1]*arr[len-2]*arr[len-3];
+  }
+  
+  
+  /*TODO: Given 2 int arrays containing single digit ints. Each array represents a very long number. 
+   *Multiply them and return results as another int array*/
 }
