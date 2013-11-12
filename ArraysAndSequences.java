@@ -321,6 +321,25 @@ public class ArraysAndSequences{
             }
             return top;
      }
+     
+     /*Given an N x N matrix with each row and each column sorted ascending. Find if number n exists in it*/
+     public boolean findInSortedMatrix(int n, int [][] mat){
+       xMax = mat[0].size();
+       yMax = mat.size();
+       int i=0, j=xMax;
+       while(i<yMax && j>=0){
+         if(mat[i][j] == n){
+           return true;
+         }
+         else if(mat[i][j] > n){
+           j--;
+         }
+         else{
+            i++;
+         }
+       }
+       return false;
+     }
 }
 
 
