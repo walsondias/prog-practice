@@ -47,4 +47,21 @@ public class BinaryTree{
 		lst.remove(n);
 		return false;
 	}
+	
+	/*Check if a binary tree is balanced*/
+	public boolean isBalanced(){
+		return maxHeight(root) - minHeight(root) <= 1;
+	}
+	public int maxHeight(Node n){
+		if (n==null)
+			return 0;
+		else
+			return 1 + Math.max(maxHeight(n.left), maxHeight(n.right));
+	}
+	public int minHeight(Node n){
+		if (n==null)
+			return 0;
+		else
+			return 1 + Math.min(maxHeight(n.left), maxHeight(n.right));
+	}
 }
