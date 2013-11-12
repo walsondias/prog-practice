@@ -147,6 +147,7 @@ public class LinkedList{
     
     /*Reverse a linked list in place*/
     public void reverse(){
+        //Iterative implementation
         Node curr = first;
         Node nxt = curr.next;
         Node prev = null;
@@ -158,5 +159,21 @@ public class LinkedList{
         }
         curr.next = prev;
         first = curr;
+    }
+    public void reverse2(){
+        //Recursive implementation
+        if(root == null)
+            return;
+        first = reverse(null, root, root.next);
+    }
+    public Node reverse(Node prev, Nore curr, Node nxt){
+        if(curr==null)
+            return;
+        curr.next = prev;
+        prev = curr;
+        curr = nxt;
+        if (curr!=null)
+            return reverse(prev, curr, curr.next);
+        return prev;
     }
 }
