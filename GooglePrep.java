@@ -81,4 +81,19 @@ public class GooglePrep{
         }
     }
     
+    //Write a function in C that takes a string, and in-place xors the first char with the last, 
+    // second with second last, etc., and after the middle part sets the char to 0. 
+    //Do this efficiently. Is strlen after the function always equal to (strlen before +1)/2? When is it not?
+    public void inPlaceXor(char [] arr){
+        for(int i=0; i<=arr.length/2; i++){
+            arr[i] = arr[i]^arr[arr.length - i];
+            arr[arr.length - i] = 0;
+        }
+    }
+    
+    //Given a number with some digits, for example 5412, calculate the minimum number with the same exact digits 
+    //that is larger that the original.
+    //In this case will be 5421. It has the same digits 1-2-4-5. 
+    //And from all the combinations bigger than 5412 is the smallest.
+    
 }
